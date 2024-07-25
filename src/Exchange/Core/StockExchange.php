@@ -6,12 +6,13 @@ namespace Freyr\Exchange\Exchange\Core;
 
 use Freyr\Exchange\Exchange\Core\Ports\BuyOrder;
 use Freyr\Exchange\Exchange\Core\Ports\SellOrder;
+use Freyr\Exchange\Exchange\Core\Ports\TraderInfoPort;
 use RuntimeException;
 
 class StockExchange
 {
     public function __construct(
-        private TraderInfoPort $traderInfo,
+        readonly private TraderInfoPort $traderInfo,
         /** @var SellOrder[] */
         private array $sellOrders,
         /** @var BuyOrder[] */
