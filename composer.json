@@ -1,5 +1,5 @@
 {
-    "name": "freyr/exchange",
+    "name": "freyr/exchange-lrv",
     "type": "project",
     "description": "StockExchange app",
     "license": "MIT",
@@ -19,7 +19,7 @@
     "autoload": {
         "psr-4": {
             "App\\": "app/",
-            "Freyr\\Exchange": "src/",
+            "Freyr\\Exchange\\": "src/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
         }
