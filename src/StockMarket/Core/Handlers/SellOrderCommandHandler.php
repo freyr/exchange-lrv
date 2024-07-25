@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Freyr\Exchange\Exchange\Core;
+namespace Freyr\Exchange\StockMarket\Core\Handlers;
 
-use Freyr\Exchange\Exchange\Core\Ports\SellOrder;
+use Freyr\Exchange\StockMarket\Core\Ports\SellOrder;
 
 class SellOrderCommandHandler
 {

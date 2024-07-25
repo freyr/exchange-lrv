@@ -2,9 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Freyr\Exchange\Exchange\Core\Ports;
+namespace Freyr\Exchange\StockMarket\Core\Ports;
 
 
 interface SellOrder extends Order
 {
+
 }
