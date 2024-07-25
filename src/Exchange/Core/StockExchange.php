@@ -21,9 +21,8 @@ class StockExchange
     ) {
     }
 
-    public function placeSellOrder(
-        SellOrder $order
-    ): void {
+    public function placeSellOrder(SellOrder $order): void
+    {
         if (!$this->traderInfo->isAllowedToTrade($order) ||
             !$this->traderInfo->hasEnoughStock($order)) {
             throw new RuntimeException();
@@ -44,7 +43,7 @@ class StockExchange
         $matchedOrder = $this->matchBuyerToSeller($order);
     }
 
-    public function matchSellerToBuyer(SellOrder $order): ?BuyOrder
+    private function matchSellerToBuyer(SellOrder $order): ?BuyOrder
     {
         /** @var BuyOrder[] $buyOrders */
         $buyOrders = array_values(
