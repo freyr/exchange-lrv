@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Freyr\Exchange\StockMarket\ReadModel;
 
 
-class ReadModelGenerator
+class SimpleListStockMarketSummary
 {
-    public function __construct()
+    public function __construct(private ReadModelRepository $repository)
     {
 
     }
@@ -23,5 +23,10 @@ class ReadModelGenerator
         // opakowuje dane w obiekt typu ReadModel
 
         // zapisuje do dedykowanej tabeli w bazie danych
+        $data = [
+
+        ];
+        $summaryReadModel = SummaryReadModel::fromRaw($data);
+        $this->repository->updateByStock($summaryReadModel);
     }
 }

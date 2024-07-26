@@ -17,6 +17,7 @@ readonly class BuyOrderCommandHandler
 
     public function __invoke(BuyOrder $command): void
     {
+        $this->crud->addNew($command);
         $aggregate = $this->repository->load(new StockExchangeId($command->getStockCode()));
         $aggregate->newIPO($command);
         $this->repository->persist($aggregate);
