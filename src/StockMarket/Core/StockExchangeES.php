@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Freyr\Exchange\StockMarket\Core;
 
-use Freyr\Exchange\AggregateId;
 use Freyr\Exchange\AggregateRoot;
+use Freyr\Exchange\AggregateRootES;
 use Freyr\Exchange\Event;
 use Freyr\Exchange\StockMarket\Core\Events\BuyOrderRegistered;
 use Freyr\Exchange\StockMarket\Core\Events\OrdersWasExecuted;
@@ -13,16 +13,12 @@ use Freyr\Exchange\StockMarket\Core\Events\SellOrderRegistered;
 use Freyr\Exchange\StockMarket\Core\Ports\BuyOrder;
 use Freyr\Exchange\StockMarket\Core\Ports\SellOrder;
 
-class StockExchange extends AggregateRoot
+class StockExchangeES extends AggregateRootES
 {
-    public function __construct(
-        readonly public StockExchangeId|AggregateId $id,
-        /** @var Order[] */
-        private array $sellOrders,
-        /** @var Order[] */
-        private array $buyOrders,
-    ) {
-    }
+    /** @var Order[] */
+    private array $buyOrders = [];
+    /** @var Order[] */
+    private array $sellOrders = [];
 
     public function placeSellOrder(SellOrder $command): void
     {
@@ -133,6 +129,15 @@ class StockExchange extends AggregateRoot
             BuyOrderRegistered::name() => $this->addNewBuyOrder($event),
             SellOrderRegistered::name() => $this->addNewSellOrder($event),
             OrdersWasExecuted::name() => $this->executeOrder($event)
+        };
+    }
+
+    protected static function restore(array $payload): Event
+    {
+        return match ($payload['_name']) {
+            BuyOrderRegistered::name() => new BuyOrderRegistered($payload),
+            SellOrderRegistered::name() => new SellOrderRegistered($payload),
+            OrdersWasExecuted::name() => new OrdersWasExecuted($payload),
         };
     }
 }

@@ -5,13 +5,12 @@ declare(strict_types=1);
 namespace Freyr\Exchange;
 
 use Doctrine\DBAL\Connection;
-use Freyr\Exchange\StockMarket\Core\ReadModelPublisher;
 use Throwable;
 
-abstract class AggregateRepository
+abstract class AggregateRepositoryES
 {
 
-    public function __construct(protected Connection $db, private ReadModelPublisher $publisher)
+    public function __construct(protected Connection $db)
     {
     }
 
@@ -26,15 +25,11 @@ abstract class AggregateRepository
                 $this->persistEvent($event);
             }
             $this->db->commit();
-            // radmodels
-            $this->publisher->publish($events);
-        } catch (Throwable $exception) {
+        } catch (Throwable) {
             if ($this->db->isTransactionActive()) {
                 $this->db->rollBack();
             }
-            throw new $exception;
         }
-
     }
 
     /** @return Event[] */

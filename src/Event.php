@@ -6,6 +6,7 @@ namespace Freyr\Exchange;
 
 use DateTimeImmutable;
 use DateTimeZone;
+use Freyr\Exchange\StockMarket\Core\Order;
 use Symfony\Component\Uid\Uuid;
 
 abstract class Event

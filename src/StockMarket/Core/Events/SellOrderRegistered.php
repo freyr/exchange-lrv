@@ -7,12 +7,12 @@ namespace Freyr\Exchange\StockMarket\Core\Events;
 use Freyr\Exchange\Event;
 use Freyr\Exchange\StockMarket\Core\Order;
 
-class BuyOrderRegistered extends Event
+class SellOrderRegistered extends Event
 {
 
     public static function name(): string
     {
-        return 'exchange.order.buy.registered';
+        return 'exchange.order.sell.registered';
     }
 
     public function getOrder(): Order

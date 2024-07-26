@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Freyr\Exchange\StockMarket\Core;
 
-use Freyr\Exchange\StockMarket\Core\Ports\OrderInfoPort;
-
 class Order
 {
     private string $status;
