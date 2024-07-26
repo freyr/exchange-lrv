@@ -32,5 +32,11 @@ readonly abstract class AggregateRepository
         }
     }
 
+    /** @return Event[] */
+    public function extractEvents(AggregateRoot $aggregate): array
+    {
+        $eventExtractor = function (): array {return $this->popRecordedEvents();};
+        return $eventExtractor->call($aggregate);
+    }
     abstract protected function persistEvent(Event $event): void;
 }

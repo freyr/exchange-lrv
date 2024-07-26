@@ -14,4 +14,9 @@ class OrderInfoAdapter implements OrderInfoPort
     {
         // TODO: Implement create() method.
     }
+
+    public function getStockCode(): string
+    {
+        // TODO: Implement getStockCode() method.
+    }
 }
